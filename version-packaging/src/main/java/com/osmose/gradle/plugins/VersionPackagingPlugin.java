@@ -20,6 +20,11 @@ public class VersionPackagingPlugin implements Plugin<ProjectInternal> {
             String branch = (String) projectInternal.getProperties().get(BRANCH);
             switch (branch) {
                 case DEVELOP:
+                    if (!version.contains(SNAPSHOT)) {
+                        // When a release branch is closed and merged on the develop one, we don't
+                        // want to build and publish a non-snapshot artifact from develop.
+                        version = version + SNAPSHOT;
+                    }
                     break;
                 case MASTER:
                     version = version.replace(SNAPSHOT, "");
