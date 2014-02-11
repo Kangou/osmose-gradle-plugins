@@ -3,7 +3,9 @@ package com.osmose.gradle.plugins
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.internal.project.ProjectInternal;
-import org.gradle.api.plugins.BasePlugin;
+import org.gradle.api.plugins.BasePlugin
+
+import java.util.concurrent.TimeUnit;
 
 
 public class VersionPackagingPlugin implements Plugin<ProjectInternal> {
@@ -48,14 +50,14 @@ public class VersionPackagingPlugin implements Plugin<ProjectInternal> {
                     eachModule({ moduleResolve ->
                         if (moduleResolve.request.version.endsWith('-SNAPSHOT')) {
                             // This will cause the dependency to be refreshed once per build execution
-                            moduleResolve.cacheFor(0, SECONDS)
+                            moduleResolve.cacheFor(0, TimeUnit.SECONDS)
                             // This would cause the dependency to be refreshed once per sub-project in a multi-project build. You wouldn't normally want that.
                             // moduleResolve.refresh()
                         }
                     } as Action)
                     eachArtifact({ artifactResolve ->
                         if (artifactResolve.request.moduleVersionIdentifier.version.endsWith('-SNAPSHOT')) {
-                            artifactResolve.cacheFor(0, SECONDS)
+                            artifactResolve.cacheFor(0, TimeUnit.SECONDS)
                         }
                     } as Action)
                 }
