@@ -1,7 +1,7 @@
 apply plugin: 'java'
 
 subprojects {
-    group = "com.osmose"
+    group = "com.innersense"
     version = '1.0-SNAPSHOT'
 }
 
