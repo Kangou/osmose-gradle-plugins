@@ -12,3 +12,12 @@ dependencies {
     compile gradleApi()
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
+
+task jarSources(type:Jar){
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jarSources
+}
